@@ -24,7 +24,13 @@
         <div class="alert alert-danger" role="alert">
             <a href="{% provider_login_url 'google' %}" class="alert-link">Kirish</a>
         </div>
-        <br><br><br>
+        <br><br>
+
+        <button class="btn btn-primary mb-2">
+            <a style="color: white" href="{% url 'social:begin' 'facebook' %}">Login with Facebook</a>
+        </button>
+
+        <br>
     </div>
 </section>
 {% include "quiz/footer.html" %}

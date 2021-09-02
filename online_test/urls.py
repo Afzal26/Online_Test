@@ -5,6 +5,8 @@ from django.contrib.auth.views import LogoutView, LoginView
 
 urlpatterns = [
     path('accounts/', include('allauth.urls')),
+    path('accounts/', include('allauth.urls')),
+    path('social-auth/', include('social_django.urls', namespace="social")),
 
     path('admin/', admin.site.urls),
     path('student/', include('student.urls')),

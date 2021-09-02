@@ -18,6 +18,7 @@ DEBUG = True
 ALLOWED_HOSTS = []
 
 AUTHENTICATION_BACKENDS = (
+    'social_core.backends.facebook.FacebookOAuth2',
     'django.contrib.auth.backends.ModelBackend',
     'allauth.account.auth_backends.AuthenticationBackend',
 )
@@ -40,6 +41,8 @@ INSTALLED_APPS = [
     'allauth.account',
     'allauth.socialaccount',
     'allauth.socialaccount.providers.google',
+    'allauth.socialaccount.providers.facebook',
+    'social_django',
 ]
 
 MIDDLEWARE = [
@@ -50,6 +53,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'social_django.middleware.SocialAuthExceptionMiddleware',  # <--for social app
 ]
 CSRF_COOKIE_SECURE = False
 ROOT_URLCONF = 'online_test.urls'
@@ -122,9 +126,12 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-SITE_ID = 3
+SITE_ID = 4
 
+LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
+LOGOUT_URL = 'logout'
+LOGOUT_REDIRECT_URL = '/'
 
 SOCIALACCOUNT_PROVIDERS = {
     'google': {
@@ -137,6 +144,9 @@ SOCIALACCOUNT_PROVIDERS = {
         }
     }
 }
+
+SOCIAL_AUTH_FACEBOOK_KEY = '3997309503717697'
+SOCIAL_AUTH_FACEBOOK_SECRET = '1b6469e276bca799f2297d5385a67f8a'
 
 # for contact us give your gmail id and password
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
