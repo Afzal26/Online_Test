@@ -69,6 +69,8 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'social_django.context_processors.backends',  # add this
+                'social_django.context_processors.login_redirect',  # add this
             ],
         },
     },
@@ -126,7 +128,7 @@ STATICFILES_DIRS = [
     STATIC_DIR,
 ]
 
-SITE_ID = 4
+SITE_ID = 6
 
 LOGIN_URL = 'login'
 LOGIN_REDIRECT_URL = '/'
@@ -147,6 +149,17 @@ SOCIALACCOUNT_PROVIDERS = {
 
 SOCIAL_AUTH_FACEBOOK_KEY = '3997309503717697'
 SOCIAL_AUTH_FACEBOOK_SECRET = '1b6469e276bca799f2297d5385a67f8a'
+
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email', 'user_link']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'id, name, email, picture.type(large), link'
+}
+SOCIAL_AUTH_FACEBOOK_EXTRA_DATA = [
+    ('name', 'name'),
+    ('email', 'email'),
+    ('picture', 'picture'),
+    ('link', 'profile_url'),
+]
 
 # for contact us give your gmail id and password
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'

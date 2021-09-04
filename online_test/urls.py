@@ -1,6 +1,8 @@
+from django.conf import settings
 from django.urls import path, include
 from django.contrib import admin
 from test_app import views
+from django.shortcuts import redirect, HttpResponseRedirect
 from django.contrib.auth.views import LogoutView, LoginView
 
 urlpatterns = [
