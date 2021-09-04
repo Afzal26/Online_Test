@@ -10,6 +10,9 @@ from test_app import models as QMODEL
 
 
 # for showing signup/login button for student
+from .models import Student
+
+
 def studentclick_view(request):
     if request.user.is_authenticated:
         return HttpResponseRedirect('afterlogin')
@@ -18,18 +21,13 @@ def studentclick_view(request):
 
 def student_signup_view(request):
     userForm = forms.StudentUserForm()
-    studentForm = forms.StudentForm()
-    mydict = {'userForm': userForm, 'studentForm': studentForm}
+    mydict = {'userForm': userForm}
     if request.method == 'POST':
         userForm = forms.StudentUserForm(request.POST)
-        studentForm = forms.StudentForm(request.POST, request.FILES)
-        if userForm.is_valid() and studentForm.is_valid():
+        if userForm.is_valid():
             user = userForm.save()
             user.set_password(user.password)
             user.save()
-            student = studentForm.save(commit=False)
-            student.user = user
-            student.save()
             my_student_group = Group.objects.get_or_create(name='STUDENT')
             my_student_group[0].user_set.add(user)
         return HttpResponseRedirect('studentlogin')
