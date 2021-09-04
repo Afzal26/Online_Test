@@ -1,3 +1,5 @@
+from django.contrib import messages
+from django.contrib.auth import authenticate, login
 from django.shortcuts import render, redirect, reverse
 from . import forms, models
 from django.db.models import Sum
@@ -65,6 +67,20 @@ def take_exam_view(request, pk):
 
     return render(request, 'student/take_exam.html',
                   {'course': course, 'total_questions': total_questions, 'total_marks': total_marks})
+
+
+def studentlogin(request):
+    if request.method == 'POST':
+        username = request.POST['username']
+        password = request.POST['password']
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return redirect('student-dashboard')
+        else:
+            messages.warning(request, "Login Error, Try again or Sign Up!")
+            return redirect('user:login')
+    return render(request, 'student/studentlogin.html')
 
 
 @login_required(login_url='studentlogin')
