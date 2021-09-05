@@ -59,12 +59,16 @@ def update_student_view(request, pk):
     studentForm = SFORM.StudentForm(request.FILES, instance=student)
     mydict = {'userForm': userForm, 'studentForm': studentForm}
     if request.method == 'POST':
-        userForm = SFORM.StudentUserForm(request.POST, instance=user)
-        studentForm = SFORM.StudentForm(request.POST, request.FILES, instance=student)
+        userForm = SFORM.StudentUserForm(request.POST or None, instance=user)
+        studentForm = SFORM.StudentForm(request.POST or None, request.FILES or None, instance=student)
         if userForm.is_valid() and studentForm.is_valid():
             user = userForm.save()
-            user.set_password(user.password)
-            user.save()
+            password = userForm.cleaned_data.get('password')
+            if password is None:
+                user.save()
+            else:
+                user.set_password(password)
+                user.save()
             studentForm.save()
             return redirect('admin-view-student')
     return render(request, 'quiz/update_student.html', context=mydict)

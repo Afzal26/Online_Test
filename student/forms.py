@@ -7,7 +7,7 @@ from . import models
 class StudentUserForm(forms.ModelForm):
     class Meta:
         model = User
-        fields = ['first_name', 'last_name', 'username', 'password']
+        fields = ['first_name', 'last_name', 'username']
         widgets = {
             'password': forms.PasswordInput()
         }
