@@ -15,7 +15,7 @@ SECRET_KEY = 'django-insecure-n5xm1ud==a-izzv%tdcken=pr25*y-cp1+qnk(84$6f-8e7srx
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['live48.uz', 'localhost']
+ALLOWED_HOSTS = ['ot.live48.uz', 'localhost']
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
