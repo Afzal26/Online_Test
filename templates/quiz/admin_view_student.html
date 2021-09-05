@@ -33,7 +33,6 @@
                 <tr>
 
                     <th>Name</th>
-                    <th>Profile Picture</th>
                     <th>Mobile</th>
                     <th>Address</th>
 
@@ -45,12 +44,16 @@
                     <tr>
 
                         <td> {{ t.get_name }}</td>
-                        {% if t.profile_pic %}
-                            <td><img src="{% static t.profile_pic.url %}" alt="Profile Pic" height="40px" width="40px"/>
-                            </td>
+                        {% if t.mobile %}
+                            <td>{{ t.mobile }}</td>
+                        {% else %}
+                            <td></td>
                         {% endif %}
-                        <td>{{ t.mobile }}</td>
-                        <td>{{ t.address }}</td>
+                        {% if t.address %}
+                            <td>{{ t.address }}</td>
+                        {% else %}
+                            <td></td>
+                        {% endif %}
 
                         <td><a class="btn btn-primary btn-xs" href="{% url 'update-student' t.id %}"><span
                                 class="glyphicon glyphicon-edit"></span></a></td>

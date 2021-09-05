@@ -60,7 +60,7 @@ def update_student_view(request, pk):
     mydict = {'userForm': userForm, 'studentForm': studentForm}
     if request.method == 'POST':
         userForm = SFORM.StudentUserForm(request.POST or None, instance=user)
-        studentForm = SFORM.StudentForm(request.POST or None, request.FILES or None, instance=student)
+        studentForm = SFORM.StudentForm(request.POST or None, instance=student)
         if userForm.is_valid() and studentForm.is_valid():
             user = userForm.save()
             password = userForm.cleaned_data.get('password')
